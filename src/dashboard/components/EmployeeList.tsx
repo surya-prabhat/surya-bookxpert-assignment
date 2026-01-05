@@ -3,6 +3,7 @@ import { deleteEmployee, getEmployees, saveEmployee } from "../../utils/storage"
 import EmployeeCard, { type Employee } from "./EmployeeCard";
 import EmployeeForm from "./EmployeeForm";
 import { useSearch } from "../../components/SearchContext";
+import FilterBar from "./FilterBar";
 
 
 export default function EmployeeList() {
@@ -10,7 +11,7 @@ export default function EmployeeList() {
     const [isModalOpen, setIsModelOpen] = useState(false);
     const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
     const { getFilteredEmployees } = useSearch();
-    
+
 
 
     useEffect(() => {
@@ -41,7 +42,7 @@ export default function EmployeeList() {
 
     const handleStatusToggle = (id: number, newStatus: boolean) => {
         const updated = employees.map((emp) => {
-            return emp.id === id ? {...emp, isActive: newStatus} : emp;
+            return emp.id === id ? { ...emp, isActive: newStatus } : emp;
         });
         setEmployees(updated);
         localStorage.setItem('employee_portal_data', JSON.stringify(updated));
@@ -56,12 +57,19 @@ export default function EmployeeList() {
             <h1 className="text-6xl text-center">Total Number of Employees: {employees.length}</h1>
 
             <div className="flex flex-col gap-2">
-                <button onClick={() => { setEditingEmployee(null); setIsModelOpen(true); }}>Add Employee</button>
-                <button onClick={handlePrint}>Print List</button>
+
+                <div className="flex justify-between">
+                    <FilterBar />
+                    <div className="mr-4 flex gap-2">
+                        <button className="text-sm bg-[#3B82F6] text-[#ebebeb] w-30 cursor-pointer h-10 rounded-lg" onClick={() => { setEditingEmployee(null); setIsModelOpen(true); }}>Add Employee</button>
+                        <button className="text-sm bg-[#ebebeb] text-[#3B82F6] w-30 cursor-pointer h-10 rounded-lg" onClick={handlePrint}>Print List</button>
+                    </div>
+                </div>
+
                 {displayList.length > 0 ? (
                     displayList.map((employee) => (
                         <div className="print-container">
-                            <EmployeeCard key={employee.id} employee={employee} onStatusChange={handleStatusToggle} onDeleteClick={(id) => handleDelete(id)} onEditClick={(emp) => { setEditingEmployee(emp); setIsModelOpen(true);} } />
+                            <EmployeeCard key={employee.id} employee={employee} onStatusChange={handleStatusToggle} onDeleteClick={(id) => handleDelete(id)} onEditClick={(emp) => { setEditingEmployee(emp); setIsModelOpen(true); }} />
                         </div>
                     ))
                 ) : (

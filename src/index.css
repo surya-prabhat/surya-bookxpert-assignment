@@ -15,7 +15,7 @@ body {
 }
 
 @media print {
-  nav, button, .search-bar {
+  nav, button, .search-bar, .no-print {
     display: none !important;
   }
 
