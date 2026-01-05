@@ -151,12 +151,12 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
 
                     <div className="flex flex-col gap-1">
                         <label className="text-sm">Employee Status</label>
-                        <Switcher1 formData={formData} setFormData={setFormData} />
+                        <Switcher1 enabled={formData.isActive} onChange={(checked) =>setFormData({ ...formData, isActive: checked})} />
                     </div>
 
-                    <div>
-                        <button type="button" onClick={onClose}>Cancel</button>
-                        <button type="submit">{employeeToEdit ? 'Update Details' : 'Create Employee'}</button>
+                    <div className="flex justify-between gap-2">
+                        <button className=" bg-[#c10007] cursor-pointer w-full h-10 rounded-lg" type="button" onClick={onClose}>Cancel</button>
+                        <button className=" bg-[#3B82F6] cursor-pointer w-full h-10 rounded-lg" type="submit">{employeeToEdit ? 'Update Details' : 'Create Employee'}</button>
                     </div>
 
                 </form>

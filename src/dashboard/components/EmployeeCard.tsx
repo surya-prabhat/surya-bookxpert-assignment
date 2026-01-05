@@ -1,4 +1,4 @@
-
+import Toggle from "./Toggle";
 
 export interface Employee {
     id: number;
@@ -10,7 +10,7 @@ export interface Employee {
     isActive: boolean;
 };
 
-export default function EmployeeCard({ employee, onEditClick, onDeleteClick }: { employee: Employee; onEditClick: (emp: any) => void; onDeleteClick: (id: number) => void;}) {
+export default function EmployeeCard({ employee, onEditClick, onDeleteClick, onStatusChange }: { employee: Employee; onEditClick: (emp: any) => void; onDeleteClick: (id: number) => void; onStatusChange: (id: number, newStatus: boolean) => void}) {
     return (
         <div className=" employee-card rounded-2xl flex gap-3 items-center mx-4 px-2 py-2 bg-[#0F172A] text-[#ebebeb] print:shadow-none">
             <div className="w-30 h-25 rounded-full overflow-hidden">
@@ -20,7 +20,7 @@ export default function EmployeeCard({ employee, onEditClick, onDeleteClick }: {
             <div className="w-full flex flex-col gap-2">
                 <div className="flex justify-between ">
                     <p className="text-2xl">{employee.fullname}</p>
-                    <button>Active</button>
+                    <Toggle enabled={employee.isActive} onChange={(newStatus) => onStatusChange(employee.id, newStatus)}/>
                 </div>
 
                 <div className="flex justify-between">

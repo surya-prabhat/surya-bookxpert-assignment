@@ -2,16 +2,23 @@ import { useEffect, useState } from "react";
 import { deleteEmployee, getEmployees, saveEmployee } from "../../utils/storage";
 import EmployeeCard, { type Employee } from "./EmployeeCard";
 import EmployeeForm from "./EmployeeForm";
+import { useSearch } from "../../components/SearchContext";
 
 
 export default function EmployeeList() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [isModalOpen, setIsModelOpen] = useState(false);
     const [editingEmployee, setEditingEmployee] = useState<Employee | null>(null);
+    const { getFilteredEmployees } = useSearch();
+    
+
 
     useEffect(() => {
         setEmployees(getEmployees());
     }, []);
+
+    const displayList = getFilteredEmployees(employees);
+
 
     const handleSave = (formData: any) => {
         if (editingEmployee) {
@@ -32,6 +39,14 @@ export default function EmployeeList() {
         }
     };
 
+    const handleStatusToggle = (id: number, newStatus: boolean) => {
+        const updated = employees.map((emp) => {
+            return emp.id === id ? {...emp, isActive: newStatus} : emp;
+        });
+        setEmployees(updated);
+        localStorage.setItem('employee_portal_data', JSON.stringify(updated));
+    };
+
     const handlePrint = () => {
         window.print();
     };
@@ -43,10 +58,10 @@ export default function EmployeeList() {
             <div className="flex flex-col gap-2">
                 <button onClick={() => { setEditingEmployee(null); setIsModelOpen(true); }}>Add Employee</button>
                 <button onClick={handlePrint}>Print List</button>
-                {employees.length > 0 ? (
-                    employees.map((employee) => (
+                {displayList.length > 0 ? (
+                    displayList.map((employee) => (
                         <div className="print-container">
-                            <EmployeeCard key={employee.id} employee={employee} onDeleteClick={(id) => handleDelete(id)} onEditClick={(emp) => { setEditingEmployee(emp); setIsModelOpen(true); console.log(emp) }} />
+                            <EmployeeCard key={employee.id} employee={employee} onStatusChange={handleStatusToggle} onDeleteClick={(id) => handleDelete(id)} onEditClick={(emp) => { setEditingEmployee(emp); setIsModelOpen(true);} } />
                         </div>
                     ))
                 ) : (

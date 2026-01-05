@@ -2,6 +2,7 @@ import LoginPage from './login/LoginPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DashboardPage from './dashboard/DashboardPage';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { SearchProvider } from './components/SearchContext';
 function App() {
     return (
         <BrowserRouter>
@@ -10,7 +11,9 @@ function App() {
                 <Route path='/dashboard'
                     element={
                         <ProtectedRoute>
-                            <DashboardPage />
+                            <SearchProvider>
+                                <DashboardPage />
+                            </SearchProvider>
                         </ProtectedRoute>
                     } />
             </Routes>
