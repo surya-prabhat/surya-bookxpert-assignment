@@ -3,7 +3,7 @@ const Switcher1 = ({ enabled, onChange }: { enabled: boolean, onChange: (state: 
 
 
   return (
-    <label className='flex cursor-pointer select-none items-center'>
+    <label className='flex cursor-pointer select-none items-center toggle'>
       <div className='relative'>
         <input
           type='checkbox'

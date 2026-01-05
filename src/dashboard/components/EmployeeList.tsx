@@ -6,6 +6,7 @@ import { useSearch } from "../../components/SearchContext";
 import FilterBar from "./FilterBar";
 
 
+
 export default function EmployeeList() {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [isModalOpen, setIsModelOpen] = useState(false);
@@ -54,13 +55,13 @@ export default function EmployeeList() {
 
     return (
         <>
-            <h1 className="text-6xl text-center">Total Number of Employees: {employees.length}</h1>
+            <h1 className=" xs:text-2xl sm:text-4xl lg:text-6xl text-center print:text-xl">Total Number of <span className="bg-[#0f172a] text-[#ebebeb] xxs:px-1 xxs:py-1 px-3 py-2 rounded-xl print:px-0 print:py-0 print:text-black">Employees</span>: {employees.length}</h1>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 mb-4">
 
-                <div className="flex justify-between">
+                <div className=" xs:flex xs:flex-col sm:flex sm:flex-row sm:justify-between">
                     <FilterBar />
-                    <div className="mr-4 flex gap-2">
+                    <div className="mr-4 flex gap-2 xs:flex xs:justify-end">
                         <button className="text-sm bg-[#3B82F6] text-[#ebebeb] w-30 cursor-pointer h-10 rounded-lg" onClick={() => { setEditingEmployee(null); setIsModelOpen(true); }}>Add Employee</button>
                         <button className="text-sm bg-[#ebebeb] text-[#3B82F6] w-30 cursor-pointer h-10 rounded-lg" onClick={handlePrint}>Print List</button>
                     </div>
@@ -73,7 +74,7 @@ export default function EmployeeList() {
                         </div>
                     ))
                 ) : (
-                    <div>
+                    <div className="text-center">
                         <p>No Employees Found, Start by adding one!</p>
                     </div>
                 )}

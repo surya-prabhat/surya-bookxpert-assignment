@@ -6,7 +6,7 @@ export default function SearchBar() {
     const { searchQuery, setSearchQuery } = useSearch();
 
     return (
-        <div className='h-11 search-bar group flex items-center w-100 bg-white px-2 py-1 border border-slate-200 rounded-xl transition-all duration-100 focus-within:outline-[#3B82F6]/20 focus-within:outline-2'>
+        <div className='xs:w-50 sm:w-100 xs:h-9 sm:h-11 search-bar group flex items-center w-100 bg-white px-2 py-1 border border-slate-200 rounded-xl transition-all duration-100 focus-within:outline-[#3B82F6]/20 focus-within:outline-2'>
             <Search className='w-10 text-[#0F172A]' />
             <input
                 value={searchQuery}

@@ -14,10 +14,26 @@ body {
   height: 100%
 }
 
+@theme {
+  
+  --breakpoint-xxs: 250px;
+  --breakpoint-xs: 320px;
+  
+}
+
+.print-emp-status {
+  display: none;
+}
+
 @media print {
-  nav, button, .search-bar, .no-print {
+  nav, button, .search-bar, .no-print, .toggle {
     display: none !important;
   }
+
+.print-emp-status {
+  display: block;
+  /* margin-left: 38rem !important; */
+}
 
   body {
     background-color: white !important;
@@ -37,4 +53,9 @@ body {
     border: 1px solid #e2e8f0 !important;
     margin-bottom: 1rem;
   }
+
+  /* .employee-image {
+    width: 4rem;
+    height: 3rem;
+  } */
 }

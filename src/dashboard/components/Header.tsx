@@ -14,7 +14,7 @@ export default function Header() {
         <div className="mt-4 flex w-full justify-between px-3">
         <SearchBar />
         <form onSubmit={handleSubmit}>
-            <button className="py-2 px-4 cursor-pointer rounded-md text-center w-full bg-[#3B82F6] mb-4 text-[#ebebeb]" type="submit">Logout</button>
+            <button className="xs:py-1 sm:py-2 xs:px-2 sm:px-4 cursor-pointer rounded-md text-center w-full bg-[#3B82F6] mb-4 text-[#ebebeb]" type="submit">Logout</button>
         </form>
         </div>
     )

@@ -52,10 +52,36 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
         }
     };
 
+    useEffect(() => {
+        if (isOpen) {
+            if (employeeToEdit) {
+                setImagePreview(employeeToEdit.image);
+                // setFormData({ ...employeeToEdit });
+            } else {
+                setImagePreview(null);
+                setFormData({
+                    id: 0,
+                    fullname: "",
+                    image: "",
+                    gender: 'Male',
+                    dob: '',
+                    state: 'None',
+                    isActive: true
+                })
+            }
+        }
+    }, [isOpen, employeeToEdit]);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.image) {
+            alert("Please select an image");
+            return;
+        }
         onSave(formData);
         onClose();
+
+
     };
 
 
@@ -87,7 +113,6 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
                                     <Camera size={20} className="text-white" />
                                     <input
                                         type="file"
-                                        required
                                         hidden
                                         className="hidden"
                                         accept="image/*"
@@ -151,7 +176,7 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
 
                     <div className="flex flex-col gap-1">
                         <label className="text-sm">Employee Status</label>
-                        <Switcher1 enabled={formData.isActive} onChange={(checked) =>setFormData({ ...formData, isActive: checked})} />
+                        <Switcher1 enabled={formData.isActive} onChange={(checked) => setFormData({ ...formData, isActive: checked })} />
                     </div>
 
                     <div className="flex justify-between gap-2">
