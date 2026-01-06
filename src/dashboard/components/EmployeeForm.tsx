@@ -19,7 +19,7 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
         image: "",
         gender: 'Male',
         dob: '',
-        state: 'None',
+        state: 'Telangana',
         isActive: true
     });
 
@@ -33,7 +33,7 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
                 image: "",
                 gender: 'Male',
                 dob: '',
-                state: 'None',
+                state: 'Telangana',
                 isActive: true
             })
         }
@@ -168,8 +168,8 @@ export default function EmployeeForm({ isOpen, onClose, employeeToEdit, onSave }
                             value={formData.state}
                             onChange={(e) => { setFormData({ ...formData, state: e.target.value }) }}
                         >
-                            <option value="Telangana">Telangana</option>
                             <option value="Maharashtra">Maharashtra</option>
+                            <option value="Telangana">Telangana</option>
                             <option value="Karnataka">Karnataka</option>
                         </select>
                     </div>
